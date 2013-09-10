@@ -9,7 +9,7 @@ Copyright 2013 Cray, Inc.
 from setuptools import setup, find_packages
 
 setup(
-    name='CloudApp',
+    name='clapp',
     version='0.1dev',
     packages=find_packages(exclude=["dependencies"]),
     zip_safe=False,
@@ -38,10 +38,9 @@ setup(
         'translitcodec',
     ],
     scripts=[
-        'scripts/cactl',
     ],
     dependency_links = [
-        'https://github.com/ryanolson/flask-bootstrap/tarball/master#egg=Flask-Bootstrap-2.3.2.10',
+        'https://github.com/ryanolson/flask-bootstrap/tarball/master#egg=Flask-Bootstrap-2.3.2.11',
         'https://github.com/ryanolson/flask-couchdb-schematics/tarball/master#egg=Flask-CouchDB-Schematics-0.1.0-beta',
     ]
 )
