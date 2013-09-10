@@ -1,17 +1,18 @@
+# -*- coding: utf-8 -*-
 """
-Benchmarkr Webapp
-~~~~~~~~~~~~~~~~~
+    setup.py
+    ~~~~~~~~
 
-Copyright 2013 Cray, Inc.
-
-
+    :copyright: (c) 2013 by Ryan Olson.
+    :license: BSD, see LICENSE for more details.
 """
+
 from setuptools import setup, find_packages
 
 setup(
     name='clapp',
     version='0.1dev',
-    packages=find_packages(exclude=["dependencies"]),
+    packages=find_packages(exclude=["dependencies", "sample"]),
     zip_safe=False,
     platforms='any',
     setup_requires=[
