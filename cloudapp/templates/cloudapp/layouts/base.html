@@ -1,0 +1,47 @@
+{% extends "bootstrap/base.html" %}
+
+{% block css %}
+{{ super() }}
+{% if enable_code-%}
+   <link rel="stylesheet" href="{{ url_for('cloudapp.static', filename='css/github.css') }}">
+{% endif-%}
+   <link rel="stylesheet" href="{{ url_for('cloudapp.static', filename='css/cloudapp.css') }}">
+{% endblock %}
+
+{% block js_top %}
+{{ super() }}
+{% include "includes/mixpanel.html" ignore missing %}
+{% endblock %}
+
+{% block topbar %}
+<div class="navbar">
+  <div class="navbar-inner">
+    <div class="container">
+      <a class='brand' href='/'>My Project</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js_btm %}
+{{ super() }}
+{% if enable_zeroclipboard %}
+<script type="text/javascript" src="{{ url_for('cloudapp.static', filename='js/ZeroClipboard.min.js') }}"></script>
+{% endif %}
+<script type="text/javascript">
+{% if enable_tooltip %}
+$(function () {
+    $('button[data-toggle="toolip"]').tooltip();
+});
+$(function () {
+    $('a[data-toggle="tooltip"]').tooltip();
+});
+{% endif %}
+$('a[href="#"]').click(function (e) {
+    e.preventDefault();
+});
+</script>
+<script type="text/javascript" src="{{ url_for('cloudapp.static', filename='js/cloudapp.js') }}"></script>
+{% include "includes/user_voice.html" ignore missing %}
+{% endblock %}
