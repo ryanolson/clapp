@@ -22,6 +22,7 @@ setup(
         'clapp',
     ],
     scripts=[
+        'scripts/samplectl'
     ],
     dependency_links = [
     ]
