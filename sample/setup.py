@@ -1,0 +1,28 @@
+# -*- coding: utf-8 -*-
+"""
+    setup.py
+    ~~~~~~~~
+
+    :copyright: (c) 2013 by Ryan Olson.
+    :license: BSD, see LICENSE for more details.
+"""
+
+from setuptools import setup, find_packages
+
+setup(
+    name='clappsample',
+    version='0.1dev',
+    packages=find_packages(),
+    zip_safe=False,
+    platforms='any',
+    setup_requires=[
+        'setuptools>=0.8',
+    ],
+    install_requires=[
+        'clapp',
+    ],
+    scripts=[
+    ],
+    dependency_links = [
+    ]
+)
