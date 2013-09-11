@@ -27,7 +27,7 @@ def create_app(cls, config=None, blueprints=None, documents=None, **kwargs):
 class Clapp(object):
 
     def __init__(self, name, config=None, blueprints=None, documents=None, **kwargs):
-        """Create a CloudApp Flask factory."""
+        """Create a Clapp Flask factory."""
 
         self.blueprints = blueprints or []
         self.documents = documents or []
@@ -57,9 +57,9 @@ class Clapp(object):
     def configure_blueprints(self, blueprints):
         """Configure blueprints in views."""
 
-        cloudapp = Blueprint('cloudapp', __name__, template_folder='templates', 
-            static_folder='static', static_url_path=self.app.static_url_path + '/cloudapp')
-        self.app.register_blueprint(cloudapp)
+        clapp = Blueprint('clapp', __name__, template_folder='templates', 
+            static_folder='static', static_url_path=self.app.static_url_path + '/clapp')
+        self.app.register_blueprint(clapp)
 
         for blueprint in blueprints:
             self.app.register_blueprint(blueprint)
@@ -115,13 +115,13 @@ class Clapp(object):
 
         @self.app.errorhandler(403)
         def forbidden_page(error):
-            return render_template("cloudapp/errors/forbidden_page.html"), 403
+            return render_template("clapp/errors/forbidden_page.html"), 403
 
         @self.app.errorhandler(404)
         def page_not_found(error):
-            return render_template("cloudapp/errors/page_not_found.html"), 404
+            return render_template("clapp/errors/page_not_found.html"), 404
 
         @self.app.errorhandler(500)
         def server_error_page(error):
-            return render_template("cloudapp/errors/server_error.html"), 500
+            return render_template("clapp/errors/server_error.html"), 500
 

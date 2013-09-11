@@ -3,7 +3,7 @@
     helpers.py
     ~~~~~~~~
 
-    Helper functions for CloudApp
+    Helper functions for clapp
 
     :copyright: (c) 2013 by Ryan Olson
     :license: BSD, see LICENSE for more details.
