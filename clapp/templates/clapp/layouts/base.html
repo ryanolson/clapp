@@ -3,9 +3,9 @@
 {% block css %}
 {{ super() }}
 {% if enable_code-%}
-   <link rel="stylesheet" href="{{ url_for('cloudapp.static', filename='css/github.css') }}">
+   <link rel="stylesheet" href="{{ url_for('clapp.static', filename='css/github.css') }}">
 {% endif-%}
-   <link rel="stylesheet" href="{{ url_for('cloudapp.static', filename='css/cloudapp.css') }}">
+   <link rel="stylesheet" href="{{ url_for('clapp.static', filename='css/clapp.css') }}">
 {% endblock %}
 
 {% block js_top %}
@@ -27,7 +27,7 @@
 {% block js_btm %}
 {{ super() }}
 {% if enable_zeroclipboard %}
-<script type="text/javascript" src="{{ url_for('cloudapp.static', filename='js/ZeroClipboard.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('clapp.static', filename='js/ZeroClipboard.min.js') }}"></script>
 {% endif %}
 <script type="text/javascript">
 {% if enable_tooltip %}
@@ -42,6 +42,6 @@ $('a[href="#"]').click(function (e) {
     e.preventDefault();
 });
 </script>
-<script type="text/javascript" src="{{ url_for('cloudapp.static', filename='js/cloudapp.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('clapp.static', filename='js/clapp.js') }}"></script>
 {% include "includes/user_voice.html" ignore missing %}
 {% endblock %}

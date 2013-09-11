@@ -11,7 +11,7 @@
 """
 
 class BaseConfig(object):
-    """Base CloudApp configuration"""
+    """Base clapp configuration"""
 
     DEBUG = True
     TESTING = False
