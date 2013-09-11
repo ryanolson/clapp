@@ -7,4 +7,8 @@
     :license: BSD, see LICENSE for more details.
 """
 
+from clapp.application import Clapp
+from .config import Config
 
+def create_app():
+    return Clapp(__name__, config=Config).app

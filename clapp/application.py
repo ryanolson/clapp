@@ -11,8 +11,10 @@ import logging
 
 from flask import Flask, Blueprint, render_template
 
+from . import extensions
 from . import helpers
 from .config import Config
+
 
 
 __all__ = ['create_app']
@@ -22,7 +24,7 @@ def create_app(cls, config=None, blueprints=None, documents=None, **kwargs):
     return cls(__name__, config=None, blueprints=None, documents=None, **kwargs).app
 
 
-class CloudApp(object):
+class Clapp(object):
 
     def __init__(self, name, config=None, blueprints=None, documents=None, **kwargs):
         """Create a CloudApp Flask factory."""
@@ -49,14 +51,14 @@ class CloudApp(object):
         # http://flask.pocoo.org/docs/config/#instance-folders
         self.app.config.from_pyfile('production.cfg', silent=True)
     
-        if config and config != Config.__name__:
+        if config:
             self.app.config.from_object(config)
 
     def configure_blueprints(self, blueprints):
         """Configure blueprints in views."""
 
         cloudapp = Blueprint('cloudapp', __name__, template_folder='templates', 
-            static_folder='static', static_url_path=app.static_url_path + '/cloudapp')
+            static_folder='static', static_url_path=self.app.static_url_path + '/cloudapp')
         self.app.register_blueprint(cloudapp)
 
         for blueprint in blueprints:
@@ -66,17 +68,18 @@ class CloudApp(object):
         """Configure extensions."""
 
         # flask-bootstrap
-        bootstrap.init_app(self.app)
+        extensions.bootstrap.init_app(self.app)
 
         # flask-couchdb-schematics
-        couchdb.init_app(self.app)
+        extensions.couchdb.init_app(self.app)
+        extensions.couchdb.connect_db(self.app)
     
     def configure_documents(self, documents):
         """Configure CouchDB Documents."""
 
         for document in documents:
-            couchdb.add_document(document)
-        couchdb.sync(self.app)
+            extensions.couchdb.add_document(document)
+        extensions.couchdb.sync(self.app)
 
     def configure_template_filters(self):
         """Configure Jinja Template Filters and Extensions."""

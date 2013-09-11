@@ -10,6 +10,10 @@
 from flask import current_app
 from flask.ext.script import Manager
 
-#from clappsample import create_app
-#manager = Manager(create_app)
+from clappsample import create_app
 
+app = create_app()
+manager = Manager(app)
+
+if __name__ == '__main__':
+    manager.run()
