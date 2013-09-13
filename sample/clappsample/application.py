@@ -8,7 +8,13 @@
 """
 
 from clapp.application import Clapp
+
 from .config import Config
+from .frontend.views import frontend
+
+BLUEPRINTS = (
+    frontend,
+)
 
 def create_app():
-    return Clapp(__name__, config=Config).app
+    return Clapp(__name__, config=Config, blueprints=BLUEPRINTS).app

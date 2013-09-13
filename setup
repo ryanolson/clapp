@@ -22,7 +22,7 @@ setup(
         'Fabric',
         'Flask',
         'Flask-Babel',
-        'Flask-Bootstrap>=2.3.2.10',
+        'Flask-Bootstrap>=2.3.2.12',
         'Flask-CouchDB-Schematics>=0.1.0-beta',
         'Flask-Login',
         'Flask-Principal',
@@ -41,7 +41,7 @@ setup(
     scripts=[
     ],
     dependency_links = [
-        'https://github.com/ryanolson/flask-bootstrap/tarball/master#egg=Flask-Bootstrap-2.3.2.11',
+        'https://github.com/ryanolson/flask-bootstrap/tarball/master#egg=Flask-Bootstrap-2.3.2.12',
         'https://github.com/ryanolson/flask-couchdb-schematics/tarball/master#egg=Flask-CouchDB-Schematics-0.1.0-beta',
     ]
 )
