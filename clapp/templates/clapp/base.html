@@ -1,4 +1,8 @@
+{% if use_cdn %}
+{% extends "bootstrap/base_cdn.html" %}
+{% else %}
 {% extends "bootstrap/base.html" %}
+{% endif %}
 
 {% block css %}
 {{ super() }}
@@ -12,17 +16,6 @@
 {{ super() }}
 {% include "includes/mixpanel.html" ignore missing %}
 {% endblock %}
-
-{% block topbar %}
-<div class="navbar">
-  <div class="navbar-inner">
-    <div class="container">
-      <a class='brand' href='/'>My Project</a>
-    </div>
-  </div>
-</div>
-{% endblock %}
-
 
 {% block js_btm %}
 {{ super() }}

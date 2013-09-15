@@ -1,2 +1,2 @@
-recursive-include flask_bootstrap/static *
-recursive-include flask_bootstrap/templates *
+recursive-include clapp/static *
+recursive-include clapp/templates *

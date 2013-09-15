@@ -59,6 +59,7 @@ class Clapp(object):
 
         clapp = Blueprint('clapp', __name__, template_folder='templates', 
             static_folder='static', static_url_path=self.app.static_url_path + '/clapp')
+    
         self.app.register_blueprint(clapp)
 
         for blueprint in blueprints:
