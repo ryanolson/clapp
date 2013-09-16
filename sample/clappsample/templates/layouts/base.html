@@ -1,0 +1,51 @@
+{% extends "clapp/base.html" %}
+
+{% block css %}
+{{ super() }}
+{% if enable_code-%}
+   <link rel="stylesheet" href="{{ url_for('clapp.static', filename='css/github.css') }}">
+{% endif-%}
+{% endblock %}
+
+{% block js_top %}
+{{ super() }}
+{% include "includes/mixpanel.html" ignore missing %}
+{% endblock %}
+
+{% block topbar %}
+<div class="navbar navbar-default">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button> 
+      <a class='navbar-brand' href='/'>My Project</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+
+{% block js_btm %}
+{{ super() }}
+{% if enable_zeroclipboard %}
+<script type="text/javascript" src="{{ url_for('clapp.static', filename='js/ZeroClipboard.min.js') }}"></script>
+{% endif %}
+<script type="text/javascript">
+{% if enable_tooltip %}
+$(function () {
+    $('button[data-toggle="toolip"]').tooltip();
+});
+$(function () {
+    $('a[data-toggle="tooltip"]').tooltip();
+});
+{% endif %}
+$('a[href="#"]').click(function (e) {
+    e.preventDefault();
+});
+</script>
+<script type="text/javascript" src="{{ url_for('clapp.static', filename='js/clapp.js') }}"></script>
+{% include "includes/user_voice.html" ignore missing %}
+{% endblock %}

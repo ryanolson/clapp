@@ -1,0 +1,2 @@
+recursive-include clapp/static *
+recursive-include clapp/templates *

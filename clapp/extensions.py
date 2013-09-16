@@ -12,7 +12,7 @@
 from flask.ext.babel import Babel
 babel = Babel()
 
-from flask.ext.bootstrap import Bootstrap
+from flask.ext.bootstrap3 import Bootstrap
 bootstrap = Bootstrap()
 
 from flask.ext.couchdb import CouchDB
