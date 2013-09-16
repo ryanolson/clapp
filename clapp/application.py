@@ -68,6 +68,9 @@ class Clapp(object):
     def configure_extensions(self):
         """Configure extensions."""
 
+        # flask-babel
+        extensions.babel.init_app(self.app)
+
         # flask-bootstrap
         extensions.bootstrap.init_app(self.app)
 
