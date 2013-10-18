@@ -9,7 +9,7 @@ from schematics.models import Model
 from schematics.types import StringType, EmailType, UUIDType
 from schematics.types.compound import ModelType, ListType, DictType
 from schematics.serialize import blacklist
-from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug import security
 
 from flask.ext.login import UserMixin
 from flask.ext.couchdb import ViewField
@@ -66,7 +66,7 @@ class User(Document, UserMixin):
 
     name = StringType(required=True)
     emails = DictType(ModelType(Email), default=lambda: {})
-    primary_email = ModelType(Email)
+    primary_email = StringType()
     roles = ListType(StringType())
 
     _password = StringType(required=True, serialized_name="password")
@@ -75,7 +75,8 @@ class User(Document, UserMixin):
         return self._password
 
     def _set_password(self, password):
-        self._password = generate_password_hash(password)
+        # validate against password rules
+        self._password = security.generate_password_hash(password)
 
     password = property(_get_password, _set_password)
 
@@ -117,7 +118,7 @@ class User(Document, UserMixin):
     def check_password(self, password):
         if self.password is None:
             return False
-        return check_password_hash(self.password, password)
+        return security.check_password_hash(self.password, password)
 
     def add_email(self, email):
         new_email = Email(dict(address=email))
@@ -136,13 +137,13 @@ class User(Document, UserMixin):
 
         for user in User.by_email[login]:
             if authenticate_user(user):
-                return user, True
+                return user
 
         for user in User.by_name[login]:
             if authenticate_user(user):
-                return user, True
+                return user
 
-        return None, False
+        return None
 
     @classmethod
     def get_by_id(cls, user_id):
