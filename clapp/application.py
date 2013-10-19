@@ -80,7 +80,6 @@ class Clapp(object):
     
     def configure_documents(self, documents):
         """Configure CouchDB Documents."""
-
         for document in documents:
             extensions.couchdb.add_document(document)
         extensions.couchdb.sync(self.app)

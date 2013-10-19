@@ -8,7 +8,7 @@ import urllib
 from schematics.models import Model
 from schematics.types import StringType, EmailType, UUIDType
 from schematics.types.compound import ModelType, ListType, DictType
-from schematics.serialize import blacklist
+from schematics.transforms import blacklist
 from werkzeug import security
 
 from flask.ext.login import UserMixin
@@ -64,9 +64,10 @@ class APIKey(Model):
 
 class User(Document, UserMixin):
 
-    name = StringType(required=True)
+    username = StringType(required=True)
     emails = DictType(ModelType(Email), default=lambda: {})
     primary_email = StringType()
+    gravatar_email = StringType()
     roles = ListType(StringType())
 
     _password = StringType(required=True, serialized_name="password")
@@ -101,10 +102,10 @@ class User(Document, UserMixin):
         }
     """)
 
-    by_name = ViewField('user', """\
+    by_username = ViewField('user', """\
         function(doc) {
             if(doc.doc_type == "User") {
-                emit(doc.name, doc);
+                emit(doc.username, doc);
             }
         }
     """)
@@ -125,6 +126,12 @@ class User(Document, UserMixin):
         if new_email.uniquify not in self.emails:
             self.emails[new_email.uniquify] = new_email
 
+    def profile_url(self, size=40):
+        address = (self.emails.get(self.gravatar_email, None) or 
+                   self.emails.get(self.primary_email, None) or
+                   Email(dict(address='whatsbrewingcompany@gmail.com')))
+        return address.gravatar_url(size) 
+
     def is_admin(self):
         return False
 
@@ -139,7 +146,7 @@ class User(Document, UserMixin):
             if authenticate_user(user):
                 return user
 
-        for user in User.by_name[login]:
+        for user in User.by_username[login]:
             if authenticate_user(user):
                 return user
 
@@ -150,8 +157,8 @@ class User(Document, UserMixin):
         return cls.load(user_id)
 
     @classmethod
-    def check_name(cls, name):
-        results = User.by_name[name]
+    def check_username(cls, username):
+        results = User.by_username[username]
         print var(results)
         print len(results)
         print var(results)
