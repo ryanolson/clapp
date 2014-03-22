@@ -15,6 +15,3 @@ babel = Babel()
 from flask.ext.bootstrap3 import Bootstrap
 bootstrap = Bootstrap()
 
-from flask.ext.couchdb import CouchDB
-couchdb = CouchDB()
-

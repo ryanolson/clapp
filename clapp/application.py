@@ -16,7 +16,6 @@ from . import helpers
 from .config import Config
 
 
-
 __all__ = ['create_app']
 
 
@@ -74,9 +73,6 @@ class Clapp(object):
         # flask-bootstrap
         extensions.bootstrap.init_app(self.app)
 
-        # flask-couchdb-schematics
-        extensions.couchdb.init_app(self.app)
-        extensions.couchdb.connect_db(self.app)
     
     def configure_documents(self, documents):
         """Configure CouchDB Documents."""
