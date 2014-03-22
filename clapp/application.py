@@ -75,11 +75,12 @@ class Clapp(object):
 
     
     def configure_documents(self, documents):
-        """Configure CouchDB Documents."""
+        pass
 
-        for document in documents:
-            extensions.couchdb.add_document(document)
-        extensions.couchdb.sync(self.app)
+#       """Configure CouchDB Documents."""
+#       for document in documents:
+#           extensions.couchdb.add_document(document)
+#       extensions.couchdb.sync(self.app)
 
     def configure_template_filters(self):
         """Configure Jinja Template Filters and Extensions."""
