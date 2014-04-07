@@ -13,6 +13,8 @@ from flask import Flask, Blueprint, render_template
 
 from . import extensions
 from . import helpers
+from .middleware import MethodRewriteMiddleware
+
 from .config import Config
 
 
@@ -32,6 +34,7 @@ class Clapp(object):
         self.documents = documents or []
 
         self.app = Flask(name, **kwargs)
+        self.app.wsgi_app = MethodRewriteMiddleware(self.app.wsgi_app)
         self.configure_app(config)
         self.configure_logging()
         self.configure_blueprints(self.blueprints)
@@ -125,4 +128,5 @@ class Clapp(object):
         @self.app.errorhandler(500)
         def server_error_page(error):
             return render_template("clapp/errors/server_error.html"), 500
+
 
